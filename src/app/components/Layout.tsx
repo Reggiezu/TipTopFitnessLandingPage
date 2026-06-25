@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Outlet, Link, useLocation } from "react-router";
-import { Menu, X, Home, Calendar, Video, User, Dumbbell, Mail } from "lucide-react";
+import { Menu, X, Home, Dumbbell, Mail, BookOpen } from "lucide-react";
 
 export function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -8,17 +8,13 @@ export function Layout() {
 
   const navItems = [
     { path: "/", label: "Home", icon: Home },
-    { path: "/booking", label: "Book Session", icon: Calendar },
-    { path: "/videos", label: "Videos", icon: Video },
-    { path: "/about", label: "About", icon: User },
+    { path: "/guides", label: "Workout Guides", icon: BookOpen },
     { path: "/services", label: "Services", icon: Dumbbell },
     { path: "/contact", label: "Contact", icon: Mail },
   ];
 
   const isActive = (path: string) => {
-    if (path === "/") {
-      return location.pathname === path;
-    }
+    if (path === "/") return location.pathname === path;
     return location.pathname.startsWith(path);
   };
 
@@ -40,14 +36,22 @@ export function Layout() {
           </button>
 
           <Link to="/" className="absolute left-1/2 -translate-x-1/2">
-            <h1 className="text-xl tracking-wide" style={{ color: '#0ABAB5' }}>
+            <h1 className="text-xl tracking-wide" style={{ color: "#0ABAB5" }}>
               TipTopFitness
             </h1>
           </Link>
 
-          <div className="w-10" /> {/* Spacer for balance */}
+          <div className="w-10" />
         </div>
       </header>
+
+      {/* Sidebar overlay */}
+      {sidebarOpen && (
+        <div
+          className="fixed inset-0 z-30 bg-black/20"
+          onClick={() => setSidebarOpen(false)}
+        />
+      )}
 
       {/* Sidebar */}
       <div
@@ -66,11 +70,9 @@ export function Layout() {
                   to={item.path}
                   onClick={() => setSidebarOpen(false)}
                   className={`flex items-center gap-3 px-4 py-3 rounded-lg transition-colors ${
-                    active
-                      ? "text-white"
-                      : "text-gray-700 hover:bg-gray-100"
+                    active ? "text-white" : "text-gray-700 hover:bg-gray-100"
                   }`}
-                  style={active ? { backgroundColor: '#0ABAB5' } : {}}
+                  style={active ? { backgroundColor: "#0ABAB5" } : {}}
                 >
                   <Icon className="w-5 h-5" />
                   <span>{item.label}</span>
@@ -79,23 +81,15 @@ export function Layout() {
             })}
           </div>
 
-          <div className="px-4 pt-4 border-t border-gray-200">
-            <p className="text-sm text-gray-500 text-center">
-              © 2026 TipTopFitness
+          <div className="px-4 pt-4 border-t border-gray-100">
+            <p className="text-xs text-gray-400 text-center">
+              © 2025 TipTopFitness
             </p>
           </div>
         </nav>
       </div>
 
-      {/* Overlay */}
-      {sidebarOpen && (
-        <div
-          className="fixed inset-0 bg-black/30 z-30"
-          onClick={() => setSidebarOpen(false)}
-        />
-      )}
-
-      {/* Main Content */}
+      {/* Main content */}
       <main className="pt-14">
         <Outlet />
       </main>
