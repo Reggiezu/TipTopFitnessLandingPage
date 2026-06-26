@@ -1,15 +1,14 @@
 import { useState, useRef, useEffect } from "react";
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import { Play } from "lucide-react";
-import { useLocation } from "react-router";
 
 const TEAL = "#0ABAB5";
 
 export type Exercise = {
   slug: string;
   name: string;
-  group: string;        // specific label shown on card badge
-  section: string;      // which filter section it belongs to
+  group: string;
+  section: string;
   sets: string;
   reps: string;
   cues: string[];
@@ -17,12 +16,12 @@ export type Exercise = {
 };
 
 export const exercises: Exercise[] = [
-  // ── GLUTES ──────────────────────────────────────────────
+  // ── STATION 1: Quads / Glutes ───────────────────────────
   {
     slug: "sumo-squat",
     name: "Sumo Squat",
     group: "Glutes",
-    section: "Glutes",
+    section: "Quads & Glutes",
     sets: "3",
     reps: "10",
     cues: ["Toes pointed out wide", "Drive knees out", "Squeeze glutes at the top"],
@@ -32,24 +31,78 @@ export const exercises: Exercise[] = [
     slug: "reverse-lunge",
     name: "Reverse Lunge",
     group: "Glutes",
-    section: "Glutes",
+    section: "Quads & Glutes",
     sets: "3",
     reps: "5 each leg",
     cues: ["Step back, not forward", "Front knee stays over ankle", "Torso upright"],
     videoUrl: "/videos/reverse-lunges.mov",
   },
-
-  // ── LOWER BODY ──────────────────────────────────────────
   {
     slug: "goblet-squat",
     name: "Goblet Squat",
     group: "Quads",
-    section: "Lower Body",
+    section: "Quads & Glutes",
     sets: "3",
     reps: "10",
     cues: ["Hold weight at chest", "Elbows inside knees at bottom", "Drive through heels"],
     videoUrl: "/videos/goblet-squat.mov",
   },
+
+  // ── STATION 2: Back ─────────────────────────────────────
+  {
+    slug: "bent-over-rows",
+    name: "Bent Over Rows",
+    group: "Back",
+    section: "Back",
+    sets: "3",
+    reps: "10",
+    cues: ["Hinge forward 45°", "Pull elbows back and past your ribs", "Squeeze shoulder blades together"],
+    videoUrl: "/videos/bent-over-rows.MOV",
+  },
+  {
+    slug: "banded-face-pull",
+    name: "Banded Face Pull",
+    group: "Back / Shoulders",
+    section: "Back",
+    sets: "3",
+    reps: "10",
+    cues: ["Pull to forehead level", "Elbows high and wide", "Squeeze rear delts at the end"],
+    videoUrl: "/videos/banded-face-pulls.MOV",
+  },
+
+  // ── STATION 3: Upper (Arms, Chest, Shoulders) ───────────
+  {
+    slug: "bicep-curl-straight-bar",
+    name: "Bicep Curl (straight bar)",
+    group: "Arms",
+    section: "Upper Body",
+    sets: "3",
+    reps: "10",
+    cues: ["Elbows stay pinned at sides", "Full range of motion", "Slow on the way down"],
+    videoUrl: "/videos/bicep-curls.mov",
+  },
+  {
+    slug: "chest-flys",
+    name: "Chest Flys",
+    group: "Chest",
+    section: "Upper Body",
+    sets: "3",
+    reps: "10",
+    cues: ["Slight bend in elbows throughout", "Wide arc open, squeeze closed", "Control the weight — don't drop it"],
+    videoUrl: "/videos/chest-flys.mov",
+  },
+  {
+    slug: "shoulder-press",
+    name: "Shoulder Press",
+    group: "Shoulders",
+    section: "Upper Body",
+    sets: "3",
+    reps: "10",
+    cues: ["Core tight, don't arch back", "Press straight overhead", "Don't shrug your ears"],
+    videoUrl: "/videos/shoulder-press.MOV",
+  },
+
+  // ── STATION 4: Lower (Calves, Hamstrings, Kettlebell) ───
   {
     slug: "calf-raises",
     name: "Calf Raises",
@@ -81,61 +134,7 @@ export const exercises: Exercise[] = [
     videoUrl: "/videos/kettlebell-swings.mov",
   },
 
-  // ── UPPER BODY ──────────────────────────────────────────
-  {
-    slug: "bent-over-rows",
-    name: "Bent Over Rows",
-    group: "Back",
-    section: "Upper Body",
-    sets: "3",
-    reps: "10",
-    cues: ["Hinge forward 45°", "Pull elbows back and past your ribs", "Squeeze shoulder blades together"],
-    videoUrl: "/videos/bent-over-rows.MOV",
-  },
-  {
-    slug: "chest-flys",
-    name: "Chest Flys",
-    group: "Chest",
-    section: "Upper Body",
-    sets: "3",
-    reps: "10",
-    cues: ["Slight bend in elbows throughout", "Wide arc open, squeeze closed", "Control the weight — don't drop it"],
-    videoUrl: "/videos/chest-flys.mov",
-  },
-  {
-    slug: "shoulder-press",
-    name: "Shoulder Press",
-    group: "Shoulders",
-    section: "Upper Body",
-    sets: "3",
-    reps: "10",
-    cues: ["Core tight, don't arch back", "Press straight overhead", "Don't shrug your ears"],
-    videoUrl: "/videos/shoulder-press.MOV",
-  },
-  {
-    slug: "banded-face-pull",
-    name: "Banded Face Pull",
-    group: "Back / Shoulders",
-    section: "Upper Body",
-    sets: "3",
-    reps: "10",
-    cues: ["Pull to forehead level", "Elbows high and wide", "Squeeze rear delts at the end"],
-    videoUrl: "/videos/banded-face-pulls.MOV",
-  },
-
-  // ── ARMS ────────────────────────────────────────────────
-  {
-    slug: "bicep-curl-straight-bar",
-    name: "Bicep Curl (straight bar)",
-    group: "Arms",
-    section: "Arms",
-    sets: "3",
-    reps: "10",
-    cues: ["Elbows stay pinned at sides", "Full range of motion", "Slow on the way down"],
-    videoUrl: "/videos/bicep-curls.mov",
-  },
-
-  // ── CARDIO ──────────────────────────────────────────────
+  // ── STATION 5: Cardio ───────────────────────────────────
   {
     slug: "rows",
     name: "Rows",
@@ -148,8 +147,19 @@ export const exercises: Exercise[] = [
   },
 ];
 
-// Sections shown in filter bar — order matters
-const SECTIONS = ["All", "Glutes", "Lower Body", "Upper Body", "Arms", "Core", "Cardio"];
+const SECTIONS = [
+  "All",
+  "Quads & Glutes",
+  "Back",
+  "Upper Body",
+  "Lower Body",
+  "Cardio",
+];
+
+// slug used for anchor/QR: "station-1-quads-glutes"
+function toAnchor(section: string) {
+  return section.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, "");
+}
 
 function VideoCard({ exercise }: { exercise: Exercise }) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -162,18 +172,9 @@ function VideoCard({ exercise }: { exercise: Exercise }) {
     }
   };
 
-  const { hash } = useLocation();
-useEffect(() => {
-  if (hash) {
-    const el = document.getElementById(hash.replace("#", ""));
-    if (el) el.scrollIntoView({ behavior: "smooth" });
-  }
-}, [hash]);
-
-
   return (
     <Link to={`/guides/${exercise.slug}`} className="block group">
-      <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+      <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow flex flex-col">
         <div className="relative aspect-[9/16] bg-gray-900 overflow-hidden">
           <video
             ref={videoRef}
@@ -211,6 +212,19 @@ useEffect(() => {
 
 export function Guides() {
   const [activeSection, setActiveSection] = useState("All");
+  const { hash } = useLocation();
+
+  // Scroll to anchor on load (for QR codes)
+  useEffect(() => {
+    if (hash) {
+      const id = hash.replace("#", "");
+      // slight delay so sections render first
+      setTimeout(() => {
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+      }, 100);
+    }
+  }, [hash]);
 
   const sectionsToShow = activeSection === "All"
     ? SECTIONS.filter((s) => s !== "All")
@@ -228,7 +242,7 @@ export function Guides() {
             <button
               key={s}
               onClick={() => setActiveSection(s)}
-              className="shrink-0 px-4 py-1.5 rounded-full text-sm font-medium transition-colors"
+              className="shrink-0 px-4 py-1.5 rounded-full text-sm font-medium transition-colors whitespace-nowrap"
               style={
                 activeSection === s
                   ? { backgroundColor: TEAL, color: "white" }
@@ -249,7 +263,7 @@ export function Guides() {
           );
           if (!items.length) return null;
           return (
-            <section key={section} id={section.toLowerCase().replace(/ /g, "-")}>
+            <section key={section} id={toAnchor(section)}>
               <h2 className="text-lg font-medium text-gray-800 mb-4">{section}</h2>
               <div className="grid grid-cols-2 gap-3">
                 {items.map((ex) => (
