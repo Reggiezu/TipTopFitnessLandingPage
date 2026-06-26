@@ -15,7 +15,7 @@ export function Home() {
           className="w-full h-full object-cover"
         >
           <source
-            src="https://assets.mixkit.co/videos/preview/mixkit-woman-doing-sit-ups-in-a-gym-40874-large.mp4"
+            src="/videos/hero.mov"
             type="video/mp4"
           />
         </video>
@@ -52,7 +52,7 @@ export function Home() {
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Link to="/booking">
+            <Link to="/contact">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -64,7 +64,7 @@ export function Home() {
               </motion.button>
             </Link>
 
-            <Link to="/videos">
+            <Link to="/guides">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

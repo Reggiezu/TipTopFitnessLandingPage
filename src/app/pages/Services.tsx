@@ -1,245 +1,223 @@
-import { User, Users, Video, Apple, Dumbbell, Calendar } from "lucide-react";
 import { Link } from "react-router";
+import { User, Video, Blend } from "lucide-react";
+
+const TEAL = "#0ABAB5";
+
+const smsLink = "/contact";
+
+function Badge({ children }: { children: React.ReactNode }) {
+  return (
+    <span
+      className="inline-block text-xs font-medium px-3 py-1 rounded-full text-white mb-4"
+      style={{ backgroundColor: TEAL }}
+    >
+      {children}
+    </span>
+  );
+}
+
+function FoundingBadge() {
+  return (
+    <div className="flex items-center gap-2 mb-3">
+      <span className="text-xs font-semibold uppercase tracking-widest text-amber-600 bg-amber-50 px-3 py-1 rounded-full border border-amber-200">
+        ⚡ Founding Rate — Limited Spots
+      </span>
+    </div>
+  );
+}
+
+function Feature({ text }: { text: string }) {
+  return (
+    <li className="flex items-start gap-2 text-sm text-gray-700">
+      <span style={{ color: TEAL }} className="mt-0.5 shrink-0">✓</span>
+      {text}
+    </li>
+  );
+}
+
+function PriceDisplay({ original, current, period }: { original: string; current: string; period: string }) {
+  return (
+    <div className="mb-4">
+      <div className="flex items-baseline gap-2">
+        <span className="text-3xl font-medium" style={{ color: TEAL }}>{current}</span>
+        <span className="text-sm text-gray-400">{period}</span>
+      </div>
+      <p className="text-sm text-gray-400 line-through">{original}</p>
+    </div>
+  );
+}
+
+function ClaimButton({ label = "Claim This Rate" }: { label?: string }) {
+  return (
+    <Link
+      to={smsLink}
+      className="block w-full py-3 text-center text-white rounded-xl text-sm font-medium hover:shadow-md transition-shadow mt-6"
+      style={{ backgroundColor: TEAL }}
+    >
+      {label}
+    </Link>
+  );
+}
+
 
 export function Services() {
-  const services = [
-    {
-      icon: User,
-      title: "1-on-1 Personal Training",
-      price: "$80/session",
-      duration: "60 minutes",
-      image: "https://images.unsplash.com/photo-1533560904424-a0c61dc306fc?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxwZXJzb25hbCUyMHRyYWluaW5nJTIwZ3ltfGVufDF8fHx8MTc3NTYxMTM5N3ww&ixlib=rb-4.1.0&q=80&w=1080",
-      features: [
-        "Customized workout plan",
-        "One-on-one attention",
-        "Form correction & technique",
-        "Flexible scheduling",
-        "Progress tracking"
-      ],
-      description: "Get personalized attention with customized workouts designed specifically for your goals and fitness level."
-    },
-    {
-      icon: Users,
-      title: "Small Group Training",
-      price: "$40/session",
-      duration: "60 minutes",
-      image: "https://images.unsplash.com/photo-1586401100295-7a8096fd231a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaXRuZXNzJTIwd29tYW4lMjB3b3Jrb3V0fGVufDF8fHx8MTc3NTYwMzgyNHww&ixlib=rb-4.1.0&q=80&w=1080",
-      features: [
-        "Max 4-6 people per group",
-        "Community motivation",
-        "Cost-effective training",
-        "Fun & energetic workouts",
-        "Make fitness friends"
-      ],
-      description: "Train with a small group of motivated individuals. Share the energy, split the cost."
-    },
-    {
-      icon: Video,
-      title: "Online Coaching",
-      price: "$150/month",
-      duration: "Unlimited access",
-      image: "https://images.unsplash.com/photo-1623171855411-3b686d975cf3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx5b2dhJTIwZml0bmVzcyUyMHdvbWFufGVufDF8fHx8MTc3NTUwMDc5OXww&ixlib=rb-4.1.0&q=80&w=1080",
-      features: [
-        "Custom workout programs",
-        "Weekly check-ins",
-        "24/7 messaging support",
-        "Exercise video library",
-        "Nutrition guidance"
-      ],
-      description: "Train anywhere, anytime with personalized programs and ongoing support from your coach."
-    },
-    {
-      icon: Apple,
-      title: "Nutrition Consultation",
-      price: "$100/session",
-      duration: "90 minutes",
-      image: "https://images.unsplash.com/photo-1634144646738-809a0f8897c4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxoZWFsdGh5JTIwbGlmZXN0eWxlJTIwZml0bmVzc3xlbnwxfHx8fDE3NzU2MDQ2NTJ8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      features: [
-        "Dietary assessment",
-        "Custom meal planning",
-        "Macro calculations",
-        "Recipe suggestions",
-        "Follow-up support"
-      ],
-      description: "Learn how to fuel your body properly with personalized nutrition guidance and meal planning."
-    },
-    {
-      icon: Dumbbell,
-      title: "Strength Training Program",
-      price: "$200/month",
-      duration: "3 sessions/week",
-      image: "https://images.unsplash.com/photo-1766287453739-c3ffc3f37d05?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxzdHJlbmd0aCUyMHRyYWluaW5nJTIwd29ya291dHxlbnwxfHx8fDE3NzU2MTEzOTd8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      features: [
-        "Build lean muscle",
-        "Increase strength",
-        "Progressive overload",
-        "Performance tracking",
-        "Supplement guidance"
-      ],
-      description: "Build strength and muscle with a structured program designed to maximize your gains."
-    },
-    {
-      icon: Calendar,
-      title: "Fitness Assessment",
-      price: "$50",
-      duration: "60 minutes",
-      image: "https://images.unsplash.com/photo-1742239614185-b50da3deb7cd?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaXRuZXNzJTIwdHJhaW5lciUyMHN0dWRpb3xlbnwxfHx8fDE3NzU2MTEzOTh8MA&ixlib=rb-4.1.0&q=80&w=1080",
-      features: [
-        "Body composition analysis",
-        "Movement screening",
-        "Goal setting session",
-        "Fitness level evaluation",
-        "Personalized recommendations"
-      ],
-      description: "Get a comprehensive evaluation of your current fitness level and receive a roadmap to your goals."
-    }
-  ];
-
   return (
     <div className="min-h-screen bg-gray-50">
+
       {/* Header */}
-      <div className="bg-white py-12 px-4">
-        <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-4xl mb-4" style={{ color: '#0ABAB5' }}>
-            Services & Pricing
-          </h1>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Choose the service that best fits your goals and lifestyle. 
-            Not sure which is right for you? Book a free consultation.
-          </p>
-        </div>
+      <div className="bg-white py-12 px-4 text-center shadow-sm">
+        <p className="text-xs font-semibold uppercase tracking-widest text-amber-600 mb-3">
+          ⚡ Founding Client Pricing — Won't Last
+        </p>
+        <h1 className="text-4xl font-medium mb-3" style={{ color: TEAL }}>
+          Services & Pricing
+        </h1>
+        <p className="text-gray-500 max-w-xl mx-auto text-sm leading-relaxed">
+          These rates are for founding clients only. You're trusting me early and I want to honor
+          that. Once these spots are gone, pricing goes up, so if you're ready, now is the time
+          to lock it in.
+        </p>
       </div>
 
-      {/* Services Grid */}
-      <div className="max-w-6xl mx-auto px-4 py-12">
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {services.map((service, index) => {
-            const Icon = service.icon;
-            return (
-              <div
-                key={index}
-                className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-lg transition-shadow"
-              >
-                {/* Image */}
-                <div className="relative h-48 overflow-hidden">
-                  <img
-                    src={service.image}
-                    alt={service.title}
-                    className="w-full h-full object-cover"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-                  <div 
-                    className="absolute bottom-4 left-4 w-12 h-12 rounded-full flex items-center justify-center"
-                    style={{ backgroundColor: '#0ABAB5' }}
-                  >
-                    <Icon className="w-6 h-6 text-white" />
-                  </div>
-                </div>
+      <div className="max-w-2xl mx-auto px-4 py-12 space-y-16">
 
-                {/* Content */}
-                <div className="p-6">
-                  <h3 className="text-xl mb-2">{service.title}</h3>
-                  <div className="flex items-baseline gap-2 mb-4">
-                    <span className="text-2xl" style={{ color: '#0ABAB5' }}>
-                      {service.price}
-                    </span>
-                    <span className="text-sm text-gray-500">
-                      / {service.duration}
-                    </span>
-                  </div>
+        {/* ── IN-PERSON ───────────────────────────────────── */}
+        <section>
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: TEAL }}>
+              <User className="w-4 h-4 text-white" />
+            </div>
+            <h2 className="text-2xl font-medium text-gray-900">In-Person Training</h2>
+          </div>
+          <p className="text-gray-500 text-sm mb-6 leading-relaxed">
+            Just you and me. I bring the plan, the energy, and the knowledge. You just have to show up.
+          </p>
 
-                  <p className="text-sm text-gray-600 mb-4">
-                    {service.description}
-                  </p>
-
-                  <div className="space-y-2 mb-6">
-                    {service.features.map((feature, idx) => (
-                      <div key={idx} className="flex items-start gap-2 text-sm">
-                        <div 
-                          className="w-1.5 h-1.5 rounded-full mt-1.5 flex-shrink-0"
-                          style={{ backgroundColor: '#0ABAB5' }}
-                        />
-                        <span className="text-gray-700">{feature}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  <Link to="/booking">
-                    <button 
-                      className="w-full py-3 text-white rounded-lg hover:shadow-md transition-shadow"
-                      style={{ backgroundColor: '#0ABAB5' }}
-                    >
-                      Book Now
-                    </button>
-                  </Link>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        {/* Package Deals */}
-        <div className="mt-16 bg-white rounded-2xl shadow-sm p-8 md:p-12">
-          <h2 className="text-3xl mb-8 text-center" style={{ color: '#0ABAB5' }}>
-            Package Deals
-          </h2>
-          <div className="grid md:grid-cols-3 gap-8">
-            <div className="text-center p-6 border-2 rounded-xl" style={{ borderColor: '#0ABAB5' }}>
-              <h3 className="text-xl mb-2">Starter Pack</h3>
-              <div className="text-3xl mb-4" style={{ color: '#0ABAB5' }}>
-                $300
-              </div>
-              <p className="text-sm text-gray-600 mb-4">
-                4 Personal Training Sessions
-              </p>
-              <p className="text-xs text-gray-500">
-                Save $20 • Expires in 60 days
-              </p>
+          <div className="grid sm:grid-cols-2 gap-4">
+            {/* Build */}
+            <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+              <FoundingBadge />
+              <Badge>2x / week</Badge>
+              <h3 className="text-lg font-medium text-gray-900 mb-1">Build</h3>
+              <p className="text-xs text-gray-400 mb-4">8 sessions per month</p>
+              <PriceDisplay original="$260 /mo" current="$160" period="/ month" />
+              <p className="text-xs text-green-600 font-medium mb-4">You save $100 as a founding client</p>
+              <ul className="space-y-2">
+                {["Custom workout program", "Form correction & coaching", "Progress tracking", "Personal check-ins"].map(f => <Feature key={f} text={f} />)}
+              </ul>
+              <ClaimButton />
             </div>
 
-            <div className="text-center p-6 border-2 rounded-xl" style={{ borderColor: '#0ABAB5', backgroundColor: '#0ABAB5' }}>
-              <h3 className="text-xl mb-2 text-white">Popular</h3>
-              <div className="text-3xl mb-4 text-white">
-                $720
-              </div>
-              <p className="text-sm text-white/90 mb-4">
-                10 Personal Training Sessions
-              </p>
-              <p className="text-xs text-white/70">
-                Save $80 • Expires in 90 days
-              </p>
-            </div>
-
-            <div className="text-center p-6 border-2 rounded-xl" style={{ borderColor: '#0ABAB5' }}>
-              <h3 className="text-xl mb-2">Premium</h3>
-              <div className="text-3xl mb-4" style={{ color: '#0ABAB5' }}>
-                $1,440
-              </div>
-              <p className="text-sm text-gray-600 mb-4">
-                20 Personal Training Sessions
-              </p>
-              <p className="text-xs text-gray-500">
-                Save $160 • Expires in 120 days
-              </p>
+            {/* Transform */}
+            <div className="bg-white rounded-2xl shadow-sm p-6 border-2" style={{ borderColor: TEAL }}>
+              <FoundingBadge />
+              <Badge>3x / week · Best Results</Badge>
+              <h3 className="text-lg font-medium text-gray-900 mb-1">Transform</h3>
+              <p className="text-xs text-gray-400 mb-4">12 sessions per month</p>
+              <PriceDisplay original="$300/mo" current="$200" period="/ month" />
+              <p className="text-xs text-green-600 font-medium mb-4">You save $100 as a founding client</p>
+              <ul className="space-y-2">
+                {["Everything in Build", "Customized meal plan", "Monthly body measurements", "Priority scheduling", "Transformation photos"].map(f => <Feature key={f} text={f} />)}
+              </ul>
+              <ClaimButton />
             </div>
           </div>
-        </div>
+        </section>
 
-        {/* Free Consultation CTA */}
-        <div className="mt-12 text-center bg-white rounded-2xl shadow-sm p-8">
-          <h2 className="text-2xl mb-3">Not Sure Where to Start?</h2>
-          <p className="text-gray-600 mb-6">
-            Book a free 15-minute consultation to discuss your goals and find the perfect program.
+        {/* ── ONLINE COACHING ─────────────────────────────── */}
+        <section>
+          <div className="flex items-center gap-3 mb-2">
+            <div className="w-9 h-9 rounded-full flex items-center justify-center shrink-0" style={{ backgroundColor: TEAL }}>
+              <Video className="w-4 h-4 text-white" />
+            </div>
+            <h2 className="text-2xl font-medium text-gray-900">Online Coaching</h2>
+          </div>
+          <p className="text-gray-500 text-sm mb-6 leading-relaxed">
+            Distance is not an excuse. Pick the format that fits your life and let's get to work.
           </p>
-          <Link to="/contact">
-            <button 
-              className="px-8 py-3 border-2 rounded-full hover:shadow-md transition-shadow"
-              style={{ borderColor: '#0ABAB5', color: '#0ABAB5' }}
-            >
-              Schedule Free Consultation
-            </button>
-          </Link>
-        </div>
+
+          <div className="grid sm:grid-cols-2 gap-4">
+            {/* Starter */}
+            <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+              <FoundingBadge />
+              <Badge>Plan Only</Badge>
+              <h3 className="text-lg font-medium text-gray-900 mb-1">Starter</h3>
+              <p className="text-xs text-gray-400 mb-4">Written program + messaging. No live sessions.</p>
+              <PriceDisplay original="$100/mo" current="$60" period="/ month" />
+              <ul className="space-y-2">
+                {["Custom monthly program", "Personal check-ins", "Form feedback via video", "Progress tracking"].map(f => <Feature key={f} text={f} />)}
+              </ul>
+              <ClaimButton label="Get Started" />
+            </div>
+
+            {/* Live Sessions */}
+            <div className="bg-white rounded-2xl shadow-sm p-6 border-2" style={{ borderColor: TEAL }}>
+              <FoundingBadge />
+              <Badge>Virtual · 2x / week · Most Popular</Badge>
+              <h3 className="text-lg font-medium text-gray-900 mb-1">Live Sessions</h3>
+              <p className="text-xs text-gray-400 mb-4">8 live Zoom/FaceTime sessions per month</p>
+              <PriceDisplay original="$220/mo" current="$120" period="/ month" />
+              <ul className="space-y-2">
+                {["8 live virtual sessions", "Custom program", "Real-time form coaching", "Customized meal plan", "Personal check-ins"].map(f => <Feature key={f} text={f} />)}
+              </ul>
+              <ClaimButton label="Get Started" />
+            </div>
+
+            {/* Full Virtual */}
+            <div className="bg-white rounded-2xl shadow-sm p-6 border border-gray-100">
+              <FoundingBadge />
+              <Badge>Virtual · 3x / week</Badge>
+              <h3 className="text-lg font-medium text-gray-900 mb-1">Full Virtual</h3>
+              <p className="text-xs text-gray-400 mb-4">12 live Zoom/FaceTime sessions per month</p>
+              <PriceDisplay original="$260/mo" current="$160" period="/ month" />
+              <ul className="space-y-2">
+                {["12 live virtual sessions", "Everything in Live Sessions", "Customized meal plan", "Weekly progress calls", "Transformation photos"].map(f => <Feature key={f} text={f} />)}
+              </ul>
+              <ClaimButton label="Get Started" />
+            </div>
+          </div>
+        </section>
+
+        {/* ── FREE CONSULT ─────────────────────────────────── */}
+        <section>
+          <div className="bg-white rounded-2xl shadow-sm p-8 text-center border border-gray-100">
+            <h2 className="text-2xl font-medium mb-2 text-gray-900">Not Sure Where to Start?</h2>
+            <p className="text-gray-500 text-sm mb-8 max-w-sm mx-auto">
+              That's okay — let's just talk. Tell me your goals and I'll help you figure out what makes the most sense for you.
+            </p>
+            <div className="grid sm:grid-cols-2 gap-4 text-left">
+              {/* Virtual consult */}
+              <div className="rounded-xl p-5 border border-gray-100 bg-gray-50">
+                <p className="text-xs text-gray-400 uppercase tracking-wide mb-1">Virtual · Zoom / FaceTime</p>
+                <h3 className="font-medium text-gray-900 mb-1">Free Consult</h3>
+                <p className="text-2xl font-medium mb-3" style={{ color: TEAL }}>Free</p>
+                <p className="text-xs text-gray-500 mb-4">A casual 15–20 min call where we talk about your goals, your lifestyle, and what you actually need. Zero pressure.</p>
+                <a
+                  href={smsLink}
+                  className="block w-full py-2.5 text-center text-white rounded-xl text-sm font-medium"
+                  style={{ backgroundColor: TEAL }}
+                >
+                  Book Free Consult
+                </a>
+              </div>
+              {/* In-person consult */}
+              <div className="rounded-xl p-5 border border-gray-100 bg-gray-50">
+                <p className="text-xs text-gray-400 uppercase tracking-wide mb-1">In-Person · Meet in Person</p>
+                <h3 className="font-medium text-gray-900 mb-1">Individual session</h3>
+                <PriceDisplay original="$30/session" current="$25" period="/ session" />
+                <p className="text-xs text-gray-500 mb-4">We meet and map out your plan in person. No commitment.</p>
+                <a
+                  href={smsLink}
+                  className="block w-full py-2.5 text-center text-white rounded-xl text-sm font-medium"
+                  style={{ backgroundColor: TEAL }}
+                >
+                  Book In-Person
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
       </div>
     </div>
   );

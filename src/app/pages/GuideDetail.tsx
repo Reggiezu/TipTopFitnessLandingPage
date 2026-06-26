@@ -26,7 +26,6 @@ export function GuideDetail() {
         <video
           src={exercise.videoUrl}
           autoPlay
-          loop
           muted
           playsInline
           controls

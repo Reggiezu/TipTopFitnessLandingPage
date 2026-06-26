@@ -1,148 +1,180 @@
-import { Award, Target, Heart, Users } from "lucide-react";
+import { Link } from "react-router";
+
+const TEAL = "#0ABAB5";
+
+const values = [
+  {
+    title: "Consistency Beats Perfection",
+    description:
+      "You don't have to be perfect to see results. You just have to keep showing up. The little things you do consistently will always beat the big things you only do once in a while.",
+  },
+  {
+    title: "Fitness Should Fit Your Life",
+    description:
+      "Your fitness journey should work with your schedule and your lifestyle. I believe in creating routines that you can actually stick with.",
+  },
+  {
+    title: "Confidence Is Earned",
+    description:
+      "Confidence doesn't magically appear. It grows every time you push yourself, finish a workout, or accomplish something you didn't think you could do.",
+  },
+  {
+    title: "You're Never Doing This Alone",
+    description:
+      "When you train with me, you have someone in your corner. I'll celebrate your wins, keep you accountable, and remind you how far you've come when you forget.",
+  },
+];
 
 export function About() {
-  const achievements = [
-    {
-      icon: Award,
-      title: "Certified Trainer",
-      description: "NASM Certified Personal Trainer & Nutrition Specialist"
-    },
-    {
-      icon: Users,
-      title: "500+ Clients",
-      description: "Helped hundreds achieve their fitness goals"
-    },
-    {
-      icon: Target,
-      title: "10+ Years",
-      description: "Over a decade of experience in fitness industry"
-    },
-    {
-      icon: Heart,
-      title: "Holistic Approach",
-      description: "Focus on mind, body, and lifestyle transformation"
-    }
-  ];
-
-  const values = [
-    {
-      title: "Personalized Training",
-      description: "Every body is unique. I create customized workout plans that fit your lifestyle, goals, and fitness level."
-    },
-    {
-      title: "Sustainable Results",
-      description: "No quick fixes or fad diets. I teach you sustainable habits that create lasting change."
-    },
-    {
-      title: "Supportive Community",
-      description: "Join a community of motivated individuals on the same journey. We grow stronger together."
-    },
-    {
-      title: "Science-Based Methods",
-      description: "Evidence-based training techniques backed by the latest fitness and nutrition research."
-    }
-  ];
-
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Hero Section */}
-      <div className="relative h-[400px] overflow-hidden">
+
+      {/* Hero */}
+      <div className="relative h-[420px] overflow-hidden">
         <img
-          src="https://images.unsplash.com/photo-1586401100295-7a8096fd231a?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxmaXRuZXNzJTIwd29tYW4lMjB3b3Jrb3V0fGVufDF8fHx8MTc3NTYwMzgyNHww&ixlib=rb-4.1.0&q=80&w=1080"
-          alt="Personal Trainer"
+          src="/images/hero_About.PNG"
+          alt="Tip's Logo"
           className="w-full h-full object-cover"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-black/30" />
-        <div className="absolute inset-0 flex items-center justify-center text-white text-center px-4">
+        <div className="absolute inset-0 flex items-center justify-center text-white text-center px-6">
           <div>
-            <h1 className="text-4xl md:text-5xl mb-4">About TipTopFitness</h1>
-            <p className="text-xl max-w-2xl">
-              Your partner in achieving optimal health and fitness
+            <h1 className="text-4xl md:text-5xl mb-4 font-medium">About Me</h1>
+            <p className="text-lg md:text-xl max-w-xl text-white/90">
+              Helping you become the strongest, most confident version of yourself.
             </p>
           </div>
         </div>
       </div>
 
-      {/* Story Section */}
-      <div className="max-w-4xl mx-auto px-4 py-16">
-        <div className="bg-white rounded-2xl shadow-sm p-8 md:p-12 mb-12">
-          <h2 className="text-3xl mb-6 text-center" style={{ color: '#0ABAB5' }}>
+      <div className="max-w-2xl mx-auto px-4 py-12 space-y-10">
+          {/* Photo */}
+        <div className="aspect-[5/8] rounded-xl overflow-hidden border-2">
+          <img
+            src="/images/About_me.PNG"
+            alt="Tip"
+            className="w-full h-full object-cover object-top"
+          />
+        </div>
+        {/* Intro */}
+        <div className="bg-white rounded-2xl shadow-sm p-8">
+          <p className="text-gray-700 leading-relaxed">
+            Fitness isn't about looking like someone else. It's about becoming the best version of
+            you. My goal is to help you build confidence, get stronger, and feel proud of what your
+            body can do.
+          </p>
+        </div>
+
+        {/* My Story */}
+        <div className="bg-white rounded-2xl shadow-sm p-8 space-y-4">
+          <h2 className="text-2xl font-medium" style={{ color: TEAL }}>
             My Story
           </h2>
-          <div className="space-y-4 text-gray-700 leading-relaxed">
-            <p>
-              Hi, I'm the founder of TipTopFitness! My journey into fitness started over 10 years 
-              ago when I transformed my own life through exercise and proper nutrition. What began 
-              as a personal challenge became my passion and ultimately my career.
-            </p>
-            <p>
-              I became a certified personal trainer because I wanted to help others experience the 
-              same life-changing transformation I did. There's nothing more rewarding than seeing 
-              my clients gain confidence, strength, and a newfound love for taking care of themselves.
-            </p>
-            <p>
-              My approach is simple: meet you where you are and guide you to where you want to be. 
-              No judgment, no unrealistic expectations—just real support, expert guidance, and proven 
-              results. Whether you're just starting out or looking to take your fitness to the next 
-              level, I'm here to help you succeed.
-            </p>
+          <p className="text-gray-700 leading-relaxed">
+            <span className="font-medium text-gray-900">Hey, I'm Tip!</span> I started
+            TipTop Fitness because fitness changed my life in ways I never expected. At first, I
+            just wanted to look better. Over time, I realized it was doing so much more than
+            changing my body. It taught me discipline, built my confidence, and showed me that I
+            was capable of doing hard things.
+          </p>
+          <p className="text-gray-700 leading-relaxed">
+            I'm still on my own fitness journey, and I think that's what makes me a better coach.
+            I know what it's like to walk into the gym feeling unsure, struggle to stay consistent,
+            or wonder if you're even doing the exercises right. I've been there too.
+          </p>
+          <p className="text-gray-700 leading-relaxed">
+            That's why I created TipTopFitness, a space where people feel encouraged, supported,
+            and challenged to become the best version of themselves.
+          </p>
+          <p className="text-gray-700 leading-relaxed">
+            Whether your goal is to lose weight, build muscle, grow your glutes, improve your
+            endurance, or simply feel healthier, I'm here to help you get there. Every workout is
+            designed with your goals in mind, and every win matters, whether it's your first
+            push-up or a new personal record.
+          </p>
+          <p className="text-gray-700 leading-relaxed">
+            At TipTop Fitness, we're not chasing perfection. We're building healthy habits, growing
+            stronger every week, and becoming more confident one workout at a time.
+          </p>
+        </div>
+
+       {/* Before & After placeholder */}
+          <div className="grid grid-cols-2 gap-4 my-6">
+           <div className="space-y-4">
+            <p className="text-xs font-medium text-gray-400 uppercase tracking-wide text-center">Before</p>
+            <div className="aspect-[2/3] rounded-xl overflow-hidden border-2 border-dashed border-gray-200">
+              <img
+                src="/images/before-back.jpeg"
+                alt="Tip back"
+                className="w-full h-full object-cover object-top"
+              />
+            </div>
+            <div className="aspect-[2/3] rounded-xl overflow-hidden border-2 border-dashed border-gray-200">
+              <img
+                src="/images/before-front.jpeg"
+                alt="Tip front"
+                className="w-full h-full object-cover object-top"
+              />
+            </div>
           </div>
-        </div>
-
-        {/* Achievements Grid */}
-        <div className="grid md:grid-cols-2 gap-6 mb-12">
-          {achievements.map((item, index) => {
-            const Icon = item.icon;
-            return (
-              <div key={index} className="bg-white rounded-xl shadow-sm p-6 flex items-start gap-4">
-                <div 
-                  className="w-12 h-12 rounded-full flex items-center justify-center flex-shrink-0"
-                  style={{ backgroundColor: '#0ABAB5' }}
-                >
-                  <Icon className="w-6 h-6 text-white" />
-                </div>
-                <div>
-                  <h3 className="mb-1">{item.title}</h3>
-                  <p className="text-sm text-gray-600">{item.description}</p>
-                </div>
+            <div className="space-y-4">
+              <p className="text-xs font-medium text-gray-400 uppercase tracking-wide text-center">After</p>
+               <div className="aspect-[2/3] rounded-xl overflow-hidden border-2 border-dashed border-gray-200">
+              <img
+                src="/images/after-back.PNG"
+                alt="Tip back"
+                className="w-full h-full object-cover"
+              />
               </div>
-            );
-          })}
-        </div>
+               <div className="aspect-[2/3] rounded-xl overflow-hidden border-2 border-dashed border-gray-200">
+              <img
+                src="/images/after-front.PNG"
+                alt="Tip front"
+                className="w-full h-full object-cover "
+              />
+              </div>
+            </div>
+          </div>
+          <p className="text-gray-600 text-sm leading-relaxed">
+            These photos remind me that real progress doesn't happen overnight. Every workout,
+            every healthy choice, and every day I stayed consistent added up. These pictures are proof that showing up for yourself works.
+          </p>
 
-        {/* Values Section */}
-        <div className="mb-12">
-          <h2 className="text-3xl mb-8 text-center" style={{ color: '#0ABAB5' }}>
-            What I Believe In
+        {/* Values */}
+        <div>
+          <h2 className="text-2xl font-medium mb-6 text-center" style={{ color: TEAL }}>
+            What I Believe
           </h2>
-          <div className="grid md:grid-cols-2 gap-6">
-            {values.map((value, index) => (
-              <div key={index} className="bg-white rounded-xl shadow-sm p-6">
-                <h3 className="mb-3" style={{ color: '#0ABAB5' }}>
-                  {value.title}
+          <div className="space-y-4">
+            {values.map((v) => (
+              <div key={v.title} className="bg-white rounded-xl shadow-sm p-6">
+                <h3 className="font-medium mb-2" style={{ color: TEAL }}>
+                  {v.title}
                 </h3>
-                <p className="text-gray-600">
-                  {value.description}
-                </p>
+                <p className="text-gray-600 text-sm leading-relaxed">{v.description}</p>
               </div>
             ))}
           </div>
         </div>
 
         {/* CTA */}
-        <div className="text-center bg-white rounded-2xl shadow-sm p-8">
-          <h2 className="text-2xl mb-4">Ready to Start Your Journey?</h2>
-          <p className="text-gray-600 mb-6 max-w-2xl mx-auto">
-            Let's work together to build a healthier, stronger, and more confident you.
+        <div className="bg-white rounded-2xl shadow-sm p-8 text-center">
+          <h2 className="text-2xl font-medium mb-3 text-gray-900">
+            Ready to Get in <span style={{ color: TEAL }}>#TipTopShape?</span>
+          </h2>
+          <p className="text-gray-500 text-sm mb-6 max-w-sm mx-auto">
+            No matter where you're starting, you belong here. Let's build strength, confidence,
+            and healthy habits together.
           </p>
-          <a
-            href="/booking"
-            className="inline-block px-8 py-3 text-white rounded-full hover:shadow-lg transition-shadow"
-            style={{ backgroundColor: '#0ABAB5' }}
+          <Link
+            to="/contact"
+            className="inline-block px-8 py-3 text-white rounded-full hover:shadow-lg transition-shadow text-sm font-medium"
+            style={{ backgroundColor: TEAL }}
           >
-            Book Your First Session
-          </a>
+            Let's Work Together
+          </Link>
         </div>
+
       </div>
     </div>
   );

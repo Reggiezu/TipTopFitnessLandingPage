@@ -1,138 +1,155 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Link } from "react-router";
 import { Play } from "lucide-react";
+import { useLocation } from "react-router";
 
 const TEAL = "#0ABAB5";
 
 export type Exercise = {
   slug: string;
   name: string;
-  group: string;
+  group: string;        // specific label shown on card badge
+  section: string;      // which filter section it belongs to
   sets: string;
   reps: string;
   cues: string[];
   videoUrl: string;
 };
 
-// ─── HARDCODED EXERCISES ───────────────────────────────────────────────
-// Replace videoUrl values with your Cloudflare R2 public URLs
 export const exercises: Exercise[] = [
-  // GLUTES
+  // ── GLUTES ──────────────────────────────────────────────
   {
-    slug: "hip-thrust",
-    name: "Hip Thrust",
+    slug: "sumo-squat",
+    name: "Sumo Squat",
     group: "Glutes",
+    section: "Glutes",
     sets: "3",
-    reps: "12–15",
-    cues: ["Drive through your heels", "Squeeze at the top", "Keep chin tucked"],
-    videoUrl: "https://pub-YOUR_R2_ID.r2.dev/hip-thrust.mp4",
+    reps: "10",
+    cues: ["Toes pointed out wide", "Drive knees out", "Squeeze glutes at the top"],
+    videoUrl: "/videos/sumo-squats.mov",
   },
   {
-    slug: "glute-bridge",
-    name: "Glute Bridge",
+    slug: "reverse-lunge",
+    name: "Reverse Lunge",
     group: "Glutes",
+    section: "Glutes",
     sets: "3",
-    reps: "15",
-    cues: ["Feet flat, hip-width apart", "Press hips straight up", "Hold 1 second at top"],
-    videoUrl: "https://pub-YOUR_R2_ID.r2.dev/glute-bridge.mp4",
+    reps: "5 each leg",
+    cues: ["Step back, not forward", "Front knee stays over ankle", "Torso upright"],
+    videoUrl: "/videos/reverse-lunges.mov",
+  },
+
+  // ── LOWER BODY ──────────────────────────────────────────
+  {
+    slug: "goblet-squat",
+    name: "Goblet Squat",
+    group: "Quads",
+    section: "Lower Body",
+    sets: "3",
+    reps: "10",
+    cues: ["Hold weight at chest", "Elbows inside knees at bottom", "Drive through heels"],
+    videoUrl: "/videos/goblet-squat.mov",
   },
   {
-    slug: "romanian-deadlift",
-    name: "Romanian Deadlift",
-    group: "Glutes",
+    slug: "calf-raises",
+    name: "Calf Raises",
+    group: "Calves",
+    section: "Lower Body",
     sets: "3",
-    reps: "10–12",
-    cues: ["Soft bend in knees", "Hinge at hips, not waist", "Feel the hamstring stretch"],
-    videoUrl: "https://pub-YOUR_R2_ID.r2.dev/rdl.mp4",
-  },
-  // UPPER BODY
-  {
-    slug: "push-up",
-    name: "Push Up",
-    group: "Upper Body",
-    sets: "3",
-    reps: "10–15",
-    cues: ["Hands shoulder-width", "Body in straight line", "Chest touches floor"],
-    videoUrl: "https://pub-YOUR_R2_ID.r2.dev/push-up.mp4",
+    reps: "10",
+    cues: ["Slow and controlled", "Full range of motion", "Pause at the top"],
+    videoUrl: "/videos/calf-raises.mov",
   },
   {
-    slug: "bent-over-row",
-    name: "Bent Over Row",
-    group: "Upper Body",
+    slug: "banded-hamstring-curl",
+    name: "Banded Hamstring Curl",
+    group: "Hamstrings",
+    section: "Lower Body",
     sets: "3",
-    reps: "12",
-    cues: ["Hinge forward 45°", "Pull elbows back", "Squeeze shoulder blades"],
-    videoUrl: "https://pub-YOUR_R2_ID.r2.dev/bent-over-row.mp4",
+    reps: "10",
+    cues: ["Keep hips down", "Slow on the way down", "Squeeze at the top"],
+    videoUrl: "/videos/banded-hamstring-curls.mov",
+  },
+  {
+    slug: "kettlebell-swing",
+    name: "Kettlebell Swing",
+    group: "Lower Body",
+    section: "Lower Body",
+    sets: "3",
+    reps: "10",
+    cues: ["Hinge at hips, not a squat", "Explosive hip drive", "Keep core tight throughout"],
+    videoUrl: "/videos/kettlebell-swings.mov",
+  },
+
+  // ── UPPER BODY ──────────────────────────────────────────
+  {
+    slug: "bent-over-rows",
+    name: "Bent Over Rows",
+    group: "Back",
+    section: "Upper Body",
+    sets: "3",
+    reps: "10",
+    cues: ["Hinge forward 45°", "Pull elbows back and past your ribs", "Squeeze shoulder blades together"],
+    videoUrl: "/videos/bent-over-rows.MOV",
+  },
+  {
+    slug: "chest-flys",
+    name: "Chest Flys",
+    group: "Chest",
+    section: "Upper Body",
+    sets: "3",
+    reps: "10",
+    cues: ["Slight bend in elbows throughout", "Wide arc open, squeeze closed", "Control the weight — don't drop it"],
+    videoUrl: "/videos/chest-flys.mov",
   },
   {
     slug: "shoulder-press",
     name: "Shoulder Press",
-    group: "Upper Body",
+    group: "Shoulders",
+    section: "Upper Body",
     sets: "3",
-    reps: "10–12",
-    cues: ["Core tight", "Press straight overhead", "Don't shrug your ears"],
-    videoUrl: "https://pub-YOUR_R2_ID.r2.dev/shoulder-press.mp4",
+    reps: "10",
+    cues: ["Core tight, don't arch back", "Press straight overhead", "Don't shrug your ears"],
+    videoUrl: "/videos/shoulder-press.MOV",
   },
-  // ARMS
   {
-    slug: "bicep-curl",
-    name: "Bicep Curl",
+    slug: "banded-face-pull",
+    name: "Banded Face Pull",
+    group: "Back / Shoulders",
+    section: "Upper Body",
+    sets: "3",
+    reps: "10",
+    cues: ["Pull to forehead level", "Elbows high and wide", "Squeeze rear delts at the end"],
+    videoUrl: "/videos/banded-face-pulls.MOV",
+  },
+
+  // ── ARMS ────────────────────────────────────────────────
+  {
+    slug: "bicep-curl-straight-bar",
+    name: "Bicep Curl (straight bar)",
     group: "Arms",
+    section: "Arms",
     sets: "3",
-    reps: "12–15",
-    cues: ["Elbows stay at sides", "Full range of motion", "Slow on the way down"],
-    videoUrl: "https://pub-YOUR_R2_ID.r2.dev/bicep-curl.mp4",
+    reps: "10",
+    cues: ["Elbows stay pinned at sides", "Full range of motion", "Slow on the way down"],
+    videoUrl: "/videos/bicep-curls.mov",
   },
+
+  // ── CARDIO ──────────────────────────────────────────────
   {
-    slug: "tricep-dip",
-    name: "Tricep Dip",
-    group: "Arms",
+    slug: "rows",
+    name: "Rows",
+    group: "Cardio",
+    section: "Cardio",
     sets: "3",
-    reps: "12",
-    cues: ["Hands behind you", "Lower until 90°", "Press through palms"],
-    videoUrl: "https://pub-YOUR_R2_ID.r2.dev/tricep-dip.mp4",
-  },
-  // CORE
-  {
-    slug: "plank",
-    name: "Plank",
-    group: "Core",
-    sets: "3",
-    reps: "30–45 sec",
-    cues: ["Forearms parallel", "Hips level", "Breathe steadily"],
-    videoUrl: "https://pub-YOUR_R2_ID.r2.dev/plank.mp4",
-  },
-  {
-    slug: "dead-bug",
-    name: "Dead Bug",
-    group: "Core",
-    sets: "3",
-    reps: "10 each side",
-    cues: ["Lower back pressed down", "Move opposite arm and leg", "Slow and controlled"],
-    videoUrl: "https://pub-YOUR_R2_ID.r2.dev/dead-bug.mp4",
-  },
-  // FULL BODY
-  {
-    slug: "squat",
-    name: "Squat",
-    group: "Full Body",
-    sets: "3",
-    reps: "15",
-    cues: ["Feet shoulder-width", "Knees track over toes", "Drive through heels"],
-    videoUrl: "https://pub-YOUR_R2_ID.r2.dev/squat.mp4",
-  },
-  {
-    slug: "lunge",
-    name: "Reverse Lunge",
-    group: "Full Body",
-    sets: "3",
-    reps: "10 each leg",
-    cues: ["Step back, not forward", "Front knee stays over ankle", "Torso upright"],
-    videoUrl: "https://pub-YOUR_R2_ID.r2.dev/lunge.mp4",
+    reps: "30 sec",
+    cues: ["Drive with your legs first", "Lean back slightly at finish", "Smooth consistent pace"],
+    videoUrl: "/videos/rows.mov",
   },
 ];
 
-const GROUPS = ["All", "Glutes", "Upper Body", "Arms", "Core", "Full Body"];
+// Sections shown in filter bar — order matters
+const SECTIONS = ["All", "Glutes", "Lower Body", "Upper Body", "Arms", "Core", "Cardio"];
 
 function VideoCard({ exercise }: { exercise: Exercise }) {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -145,15 +162,22 @@ function VideoCard({ exercise }: { exercise: Exercise }) {
     }
   };
 
+  const { hash } = useLocation();
+useEffect(() => {
+  if (hash) {
+    const el = document.getElementById(hash.replace("#", ""));
+    if (el) el.scrollIntoView({ behavior: "smooth" });
+  }
+}, [hash]);
+
+
   return (
     <Link to={`/guides/${exercise.slug}`} className="block group">
       <div className="bg-white rounded-2xl overflow-hidden shadow-sm hover:shadow-md transition-shadow">
-        {/* Video */}
         <div className="relative aspect-[9/16] bg-gray-900 overflow-hidden">
           <video
             ref={videoRef}
             src={exercise.videoUrl}
-            loop
             muted
             playsInline
             className="w-full h-full object-cover"
@@ -176,7 +200,6 @@ function VideoCard({ exercise }: { exercise: Exercise }) {
             {exercise.group}
           </span>
         </div>
-        {/* Info */}
         <div className="p-3">
           <p className="font-medium text-gray-900">{exercise.name}</p>
           <p className="text-sm text-gray-500">{exercise.sets} sets · {exercise.reps} reps</p>
@@ -187,52 +210,47 @@ function VideoCard({ exercise }: { exercise: Exercise }) {
 }
 
 export function Guides() {
-  const [activeGroup, setActiveGroup] = useState("All");
+  const [activeSection, setActiveSection] = useState("All");
 
-  const filtered = activeGroup === "All"
-    ? exercises
-    : exercises.filter((e) => e.group === activeGroup);
-
-  const groups = activeGroup === "All"
-    ? GROUPS.filter((g) => g !== "All")
-    : [activeGroup];
+  const sectionsToShow = activeSection === "All"
+    ? SECTIONS.filter((s) => s !== "All")
+    : [activeSection];
 
   return (
     <div className="min-h-screen bg-gray-50">
-      {/* Header */}
+      {/* Sticky header + filter */}
       <div className="bg-white px-4 pt-6 pb-4 shadow-sm sticky top-14 z-20">
         <h1 className="text-2xl font-medium mb-3" style={{ color: TEAL }}>
           Workout Guides
         </h1>
-        {/* Filter pills */}
         <div className="flex gap-2 overflow-x-auto pb-1 scrollbar-hide">
-          {GROUPS.map((g) => (
+          {SECTIONS.map((s) => (
             <button
-              key={g}
-              onClick={() => setActiveGroup(g)}
+              key={s}
+              onClick={() => setActiveSection(s)}
               className="shrink-0 px-4 py-1.5 rounded-full text-sm font-medium transition-colors"
               style={
-                activeGroup === g
+                activeSection === s
                   ? { backgroundColor: TEAL, color: "white" }
                   : { backgroundColor: "#f3f4f6", color: "#374151" }
               }
             >
-              {g}
+              {s}
             </button>
           ))}
         </div>
       </div>
 
-      {/* Content */}
+      {/* Sections */}
       <div className="px-4 py-6 space-y-10">
-        {groups.map((group) => {
-          const items = filtered.filter((e) =>
-            activeGroup === "All" ? e.group === group : true
+        {sectionsToShow.map((section) => {
+          const items = exercises.filter((e) =>
+            activeSection === "All" ? e.section === section : e.section === activeSection
           );
           if (!items.length) return null;
           return (
-            <section key={group} id={group.toLowerCase().replace(" ", "-")}>
-              <h2 className="text-lg font-medium text-gray-800 mb-4">{group}</h2>
+            <section key={section} id={section.toLowerCase().replace(/ /g, "-")}>
+              <h2 className="text-lg font-medium text-gray-800 mb-4">{section}</h2>
               <div className="grid grid-cols-2 gap-3">
                 {items.map((ex) => (
                   <VideoCard key={ex.slug} exercise={ex} />

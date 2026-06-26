@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Mail, Phone, Instagram } from "lucide-react";
 
 // ✅ Replace this with your actual Formspree form ID
-const FORMSPREE_ID = "YOUR_FORMSPREE_ID";
+const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID;
 
 const TEAL = "#0ABAB5";
 
@@ -57,19 +57,19 @@ export function Contact() {
       <div className="max-w-lg mx-auto px-4 py-8 space-y-6">
         {/* Quick contact */}
         <div className="flex justify-center gap-6">
-          <a href="mailto:hello@tiptopfitness.com" className="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-700">
+          <a href="mailto:trainwithtiptop@gmail.com" className="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-700">
             <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: "#E6FAFA" }}>
               <Mail className="w-5 h-5" style={{ color: TEAL }} />
             </div>
             <span className="text-xs">Email</span>
           </a>
-          <a href="tel:+15551234567" className="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-700">
+          <a href="tel:+16016088089" className="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-700">
             <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: "#E6FAFA" }}>
               <Phone className="w-5 h-5" style={{ color: TEAL }} />
             </div>
             <span className="text-xs">Call</span>
           </a>
-          <a href="https://instagram.com/tiptopfitness" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-700">
+          <a href="https://instagram.com/tiptopfitnesss" target="_blank" rel="noopener noreferrer" className="flex flex-col items-center gap-1 text-gray-500 hover:text-gray-700">
             <div className="w-10 h-10 rounded-full flex items-center justify-center" style={{ backgroundColor: "#E6FAFA" }}>
               <Instagram className="w-5 h-5" style={{ color: TEAL }} />
             </div>
