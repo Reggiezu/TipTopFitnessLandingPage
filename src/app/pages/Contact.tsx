@@ -154,9 +154,9 @@ export function Contact() {
                 >
                   <option value="">Select an option...</option>
                   <option value="Free Consultation">Free Consultation</option>
-                  <option value="1-on-1 Session">1-on-1 Session</option>
-                  <option value="Training Package">Training Package</option>
-                  <option value="Virtual Training">Virtual Training</option>
+                  <option value="Group Training">Group Training</option>
+                  <option value="1-on-1 Session (Waitlist)" disabled>1-on-1 Session (Sold Out)</option>
+                  <option value="Virtual Group Training " >Virtual Group Training </option>
                   <option value="General Question">General Question</option>
                 </select>
               </div>

@@ -49,13 +49,13 @@ export function About() {
 
       <div className="max-w-2xl mx-auto px-4 py-12 space-y-10">
           {/* Photo */}
-        <div className="aspect-[5/8] rounded-xl overflow-hidden border-2">
-          <img
-            src="/images/About_me.PNG"
-            alt="Tip"
-            className="w-full h-full object-cover object-top"
-          />
-        </div>
+        <div className="aspect-[4/4] rounded-xl overflow-hidden border-2">
+        <img
+          src="/images/About_me2.png"
+          alt="Tip"
+          className="w-full h-full object-cover object-top"
+        />
+      </div>
         {/* Intro */}
         <div className="bg-white rounded-2xl shadow-sm p-8">
           <p className="text-gray-700 leading-relaxed">
@@ -121,14 +121,14 @@ export function About() {
               <p className="text-xs font-medium text-gray-400 uppercase tracking-wide text-center">After</p>
                <div className="aspect-[2/3] rounded-xl overflow-hidden border-2 border-dashed border-gray-200">
               <img
-                src="/images/after-back.PNG"
+                src="/images/after-back2.PNG"
                 alt="Tip back"
                 className="w-full h-full object-cover"
               />
               </div>
                <div className="aspect-[2/3] rounded-xl overflow-hidden border-2 border-dashed border-gray-200">
               <img
-                src="/images/after-front.PNG"
+                src="/images/after-front2.png"
                 alt="Tip front"
                 className="w-full h-full object-cover "
               />

@@ -2,6 +2,7 @@ import { motion } from "motion/react";
 import { ArrowRight, Play } from "lucide-react";
 import { Link } from "react-router";
 
+
 export function Home() {
   return (
     <div className="relative min-h-screen overflow-hidden">
@@ -34,20 +35,22 @@ export function Home() {
           <h1 
             className="text-5xl md:text-7xl mb-4 tracking-wide"
             style={{ 
-              fontFamily: 'cursive',
-              color: '#0ABAB5',
-              textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
-            }}
+            fontFamily: "'Dancing Script', cursive",
+            color: '#0ABAB5',
+            textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
+          }}
           >
             TipTopFitness
           </h1>
           
-          <p className="text-xl md:text-2xl mb-8 text-white/90">
+          <p className="text-xl md:text-2xl mb-8 font-bold drop-shadow-lg"
+            style={{ fontFamily: "'Nunito', sans-serif", color: 'white', textShadow: '2px 2px 8px rgba(0,0,0,0.8)' }}>
             Transform Your Body, Transform Your Life
           </p>
 
-          <p className="text-base md:text-lg mb-12 text-white/80">
-            Personal training tailored to your goals. Build strength, confidence, 
+          <p className="text-base md:text-lg mb-12 font-semibold drop-shadow-md"
+            style={{ fontFamily: "'Nunito', sans-serif", color: 'rgba(255,255,255,0.95)', textShadow: '1px 1px 6px rgba(0,0,0,0.8)' }}>
+            Personal training tailored to your goals. Build strength, confidence,
             and a healthier lifestyle with expert guidance and motivation.
           </p>
 

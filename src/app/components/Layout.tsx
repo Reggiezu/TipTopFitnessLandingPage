@@ -38,7 +38,11 @@ export function Layout() {
           </button>
 
           <Link to="/" className="absolute left-1/2 -translate-x-1/2">
-            <h1 className="text-xl tracking-wide" style={{ color: "#0ABAB5" }}>
+            <h1 className="text-xl tracking-wide" style={{ 
+            fontFamily: "'Dancing Script', cursive",
+            color: '#0ABAB5',
+            textShadow: '2px 2px 4px rgba(0,0,0,0.5)'
+          }}>
               TipTopFitness
             </h1>
           </Link>
