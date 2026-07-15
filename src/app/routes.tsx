@@ -8,6 +8,7 @@ import { Services } from "./pages/Services";
 import { Contact } from "./pages/Contact";
 import { Guides } from "./pages/Guides";
 import { GuideDetail } from "./pages/GuideDetail";
+import { Transformations } from "./pages/Transformations";
 
 export const router = createBrowserRouter([
   {
@@ -19,6 +20,7 @@ export const router = createBrowserRouter([
       { path: "guides/:slug", Component: GuideDetail },
       { path: "services", Component: Services },
       { path: "contact", Component: Contact },
+      { path: "transformations", Component: Transformations },
       // hidden for now
       { path: "booking", Component: Booking },
       { path: "videos", Component: Videos },

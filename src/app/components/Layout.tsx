@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Outlet, Link, useLocation } from "react-router";
-import { Menu, X, Home, Dumbbell, Mail, BookOpen, User } from "lucide-react";
+import { Menu, X, Home, Dumbbell, Mail, BookOpen, User,Trophy } from "lucide-react";
 
 export function Layout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
@@ -12,6 +12,7 @@ export function Layout() {
   { path: "/guides", label: "Workout Guides", icon: BookOpen },
   { path: "/services", label: "Services", icon: Dumbbell },
   { path: "/contact", label: "Contact", icon: Mail },
+  { path: "/transformations", label: "Transformations", icon: Trophy },
 ];
 
 
