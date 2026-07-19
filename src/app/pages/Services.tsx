@@ -150,7 +150,7 @@ export function Services() {
               <Badge>In-Person · M / W / F</Badge>
               <h3 className="text-lg font-medium text-gray-900 mb-1">Semi-Private Training</h3>
               <p className="text-xs text-gray-400 mb-4">Small group · 3–6 people · Two time slots</p>
-              <PriceDisplay original="$220/mo" current="$160" period="/ month" />
+              <PriceDisplay original="$220/mo" current="$125" period="/ month" />
               <p className="text-xs text-green-600 font-medium mb-4">Founding client rate</p>
               <ul className="space-y-2 flex-1">
                 {[
@@ -172,7 +172,7 @@ export function Services() {
               <Badge>Online · M / W / F</Badge>
               <h3 className="text-lg font-medium text-gray-900 mb-1">Online Group</h3>
               <p className="text-xs text-gray-400 mb-4">Dumbbell training · Zoom/FaceTime · Two time slots</p>
-              <PriceDisplay original="$180/mo" current="$120" period="/ month" />
+              <PriceDisplay original="$180/mo" current="$100" period="/ month" />
               <p className="text-xs text-green-600 font-medium mb-4">Founding client rate</p>
               <ul className="space-y-2 flex-1">
                 {[
