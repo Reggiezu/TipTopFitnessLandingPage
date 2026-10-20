@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { Mail, Phone, Instagram } from "lucide-react";
+import { createClient } from "@supabase/supabase-js";
 
-// ✅ Replace this with your actual Formspree form ID
-const FORMSPREE_ID = import.meta.env.VITE_FORMSPREE_ID;
+const supabase = createClient(
+  import.meta.env.VITE_SUPABASE_URL,
+  import.meta.env.VITE_SUPABASE_ANON_KEY
+);
 
 const TEAL = "#0ABAB5";
 
@@ -26,17 +29,16 @@ export function Contact() {
     e.preventDefault();
     setStatus("submitting");
     try {
-      const res = await fetch(`https://formspree.io/f/${FORMSPREE_ID}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json", Accept: "application/json" },
-        body: JSON.stringify(form),
-      });
-      if (res.ok) {
-        setStatus("success");
-        setForm({ name: "", email: "", phone: "", inquiryType: "", message: "" });
-      } else {
-        setStatus("error");
-      }
+      const { error } = await supabase.from("contact_submissions").insert([{
+        name: form.name,
+        email: form.email,
+        phone: form.phone || null,
+        inquiry_type: form.inquiryType,
+        message: form.message,
+      }]);
+      if (error) throw error;
+      setStatus("success");
+      setForm({ name: "", email: "", phone: "", inquiryType: "", message: "" });
     } catch {
       setStatus("error");
     }
@@ -156,7 +158,7 @@ export function Contact() {
                   <option value="Free Consultation">Free Consultation</option>
                   <option value="Group Training">Group Training</option>
                   <option value="1-on-1 Session (Waitlist)" disabled>1-on-1 Session (Sold Out)</option>
-                  <option value="Virtual Group Training " >Virtual Group Training </option>
+                  <option value="Virtual Group Training">Virtual Group Training</option>
                   <option value="General Question">General Question</option>
                 </select>
               </div>
