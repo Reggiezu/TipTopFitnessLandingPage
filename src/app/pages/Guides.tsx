@@ -1,6 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Link, useLocation } from "react-router";
 import { Play } from "lucide-react";
+import { toAnchor } from "../../lib/anchor";
 
 const TEAL = "#0ABAB5";
 
@@ -156,10 +157,7 @@ const SECTIONS = [
   "Cardio",
 ];
 
-// slug used for anchor/QR: "station-1-quads-glutes"
-function toAnchor(section: string) {
-  return section.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/-$/, "");
-}
+
 
 function VideoCard({ exercise }: { exercise: Exercise }) {
   const videoRef = useRef<HTMLVideoElement>(null);

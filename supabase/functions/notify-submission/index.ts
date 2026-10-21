@@ -1,10 +1,16 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 
 const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY")!;
-const TO_EMAIL = "reginaldosakue@gmail.com";
-const FROM_EMAIL = "TipTopFitness <onboarding@resend.dev>";
+const TO_EMAIL = Deno.env.get("NOTIFY_TO_EMAIL");
+const FROM_EMAIL =
+  Deno.env.get("FROM_EMAIL") ?? "TipTopFitness <onboarding@resend.dev>";
+
 
 serve(async (req) => {
+  if (!TO_EMAIL) {
+    console.error("NOTIFY_TO_EMAIL secret is not set");
+    return new Response("Server misconfigured", { status: 500 });
+  }
   const { name, email, phone, inquiry_type, message } = await req.json();
 
   const html = `
