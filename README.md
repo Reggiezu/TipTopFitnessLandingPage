@@ -4,7 +4,7 @@
 
 ![Home Page Gif](public/images/gif-home.gif)
 
-![Demo Video](https://youtu.be/HHn0hCUDiS0)
+[![Watch the walkthrough](https://img.youtube.com/vi/HHn0hCUDiS0/hqdefault.jpg)](https://youtu.be/HHn0hCUDiS0)
 
 A website for Tip, a personal trainer in Atlanta. Her clients needed one place to see services, follow exercise guides, and get in touch. I built it as a fast single-page app that she can share by link or QR code, with a contact form that stores every message and emails her.
 
